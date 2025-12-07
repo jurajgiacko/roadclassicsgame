@@ -1570,8 +1570,7 @@ function updateGame(delta) {
 
     energyBar.style.width = `${gameState.energy}%`;
 
-    // Update route progress marker
-    const progress = gameState.distance / gameState.totalDistance;
+    // Update route progress marker (reuse progress variable from above)
     playerMarker.style.bottom = `${5 + progress * 90}%`;
 
     // Color energy bar based on level
