@@ -30,62 +30,186 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
             pointer-events: none;
             z-index: 100;
         }
 
+        .hud-left, .hud-right {
+            display: flex;
+            gap: 15px;
+        }
+
         .hud-panel {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             border: 2px solid #ff6600;
             border-radius: 10px;
-            padding: 15px 25px;
+            padding: 12px 20px;
             color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .hud-panel.rank {
+            border-color: #ffcc00;
+            background: rgba(40, 30, 0, 0.8);
+        }
+
+        .hud-panel.elevation {
+            border-color: #00cc00;
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #ff6600;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hud-panel.rank .stat-label {
+            color: #ffcc00;
+        }
+
+        .hud-panel.elevation .stat-label {
+            color: #00cc00;
         }
 
         .stat-value {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
         }
+
+        .stat-value.small {
+            font-size: 20px;
+        }
+
+        /* Position indicator */
+        #position-display {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        #position-display .ordinal {
+            font-size: 14px;
+            color: #ffcc00;
+        }
+
+        /* Minimap / Route progress */
+        #route-progress {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #ff6600;
+            border-radius: 20px;
+            z-index: 100;
+            overflow: hidden;
+        }
+
+        #route-track {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 90%;
+            top: 5%;
+            background: linear-gradient(to bottom, #ff0000, #ff6600, #ffcc00, #00cc00);
+            border-radius: 2px;
+        }
+
+        #player-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #ff6600;
+            border: 3px solid white;
+            border-radius: 50%;
+            bottom: 5%;
+            transition: bottom 0.3s;
+            box-shadow: 0 0 10px #ff6600;
+        }
+
+        .checkpoint-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: white;
+        }
+
+        #checkpoint-raspenava { bottom: 30%; }
+        #checkpoint-krystofovo { bottom: 65%; }
+        #checkpoint-jested { bottom: 95%; }
 
         /* Energy Bar */
         #energy-container {
             position: absolute;
-            bottom: 30px;
+            bottom: 25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 400px;
+            width: 350px;
             z-index: 100;
         }
 
         #energy-bar-bg {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             border: 2px solid #ff6600;
-            border-radius: 15px;
-            height: 30px;
+            border-radius: 12px;
+            height: 25px;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         #energy-bar {
             height: 100%;
-            background: linear-gradient(90deg, #ff0000, #ff6600, #00ff00);
+            background: linear-gradient(90deg, #00cc00, #00ff00);
             width: 100%;
-            transition: width 0.3s;
+            transition: width 0.2s;
         }
 
         #energy-label {
             text-align: center;
             color: #ff6600;
-            font-size: 14px;
+            font-size: 12px;
             margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        /* Speedometer */
+        #speedometer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ff6600;
+            border-radius: 50%;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #speedometer .speed-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #speedometer .speed-unit {
+            font-size: 12px;
+            color: #ff6600;
         }
 
         /* Start Screen */
@@ -107,14 +231,25 @@
             font-size: 72px;
             color: #ff6600;
             text-shadow: 0 0 20px #ff6600, 0 0 40px #ff3300;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             letter-spacing: 5px;
         }
 
         #start-screen h2 {
             font-size: 28px;
             color: white;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
+        }
+
+        .route-info {
+            color: #888;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .route-info span {
+            color: #00cc00;
+            font-weight: bold;
         }
 
         #start-btn {
@@ -147,21 +282,33 @@
             color: #ff6600;
         }
 
+        .powered-by {
+            position: absolute;
+            bottom: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .powered-by span {
+            color: #ff6600;
+        }
+
         /* Enervit Pickup Notification */
         #pickup-notification {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 100, 0, 0.9);
+            background: rgba(0, 80, 0, 0.95);
             padding: 20px 40px;
             border-radius: 15px;
             border: 3px solid #00ff00;
             color: white;
-            font-size: 24px;
+            font-size: 22px;
             display: none;
             z-index: 150;
             animation: popIn 0.3s ease-out;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes popIn {
@@ -188,11 +335,17 @@
             font-size: 64px;
             color: #00ff00;
             text-shadow: 0 0 20px #00ff00;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        #finish-position {
+            font-size: 36px;
+            color: #ffcc00;
+            margin-bottom: 20px;
         }
 
         #final-time {
-            font-size: 48px;
+            font-size: 42px;
             color: white;
             margin-bottom: 40px;
         }
@@ -210,12 +363,19 @@
             display: none;
             z-index: 250;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         #product-selection h2 {
             color: #ff6600;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        #product-selection .situation {
+            color: #ffcc00;
             margin-bottom: 20px;
-            font-size: 28px;
+            font-size: 16px;
         }
 
         .product-options {
@@ -241,27 +401,17 @@
             box-shadow: 0 0 20px #ff6600;
         }
 
-        .product-btn img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
-
         .product-btn .product-name {
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
+            margin-top: 10px;
         }
 
         .product-btn .product-effect {
             color: #00ff00;
             font-size: 12px;
             margin-top: 5px;
-        }
-
-        .product-btn.wrong .product-effect {
-            color: #ff0000;
         }
     </style>
 </head>
@@ -271,28 +421,59 @@
         <div id="start-screen">
             <h1>ROAD CLASSICS</h1>
             <h2>Cesta na Ještěd</h2>
-            <button id="start-btn">START</button>
+            <div class="route-info">
+                Krátká trasa: <span>49 km</span> | Převýšení: <span>1100 m</span>
+            </div>
+            <button id="start-btn">START ZÁVODU</button>
             <div class="controls-info">
-                <span>↑</span> Zrychlení &nbsp;&nbsp;
-                <span>↓</span> Brzda &nbsp;&nbsp;
-                <span>←→</span> Zatáčení
+                <span>↑/W</span> Šlapat &nbsp;&nbsp;
+                <span>↓/S</span> Brzda &nbsp;&nbsp;
+                <span>←→/A/D</span> Směr
+            </div>
+            <div class="powered-by">
+                Powered by <span>ENERVIT</span>
             </div>
         </div>
 
         <!-- HUD -->
         <div id="hud" style="display: none;">
-            <div class="hud-panel">
-                <div class="stat-label">Rychlost</div>
-                <div class="stat-value"><span id="speed">0</span> km/h</div>
+            <div class="hud-left">
+                <div class="hud-panel rank">
+                    <div class="stat-label">Pozice</div>
+                    <div class="stat-value" id="position-display">
+                        <span id="rank">1</span><span class="ordinal">.</span> / 9
+                    </div>
+                </div>
+                <div class="hud-panel">
+                    <div class="stat-label">Čas</div>
+                    <div class="stat-value" id="time">00:00</div>
+                </div>
             </div>
-            <div class="hud-panel">
-                <div class="stat-label">Čas</div>
-                <div class="stat-value" id="time">00:00</div>
+            <div class="hud-right">
+                <div class="hud-panel elevation">
+                    <div class="stat-label">Nadmořská výška</div>
+                    <div class="stat-value small"><span id="elevation">370</span> m</div>
+                </div>
+                <div class="hud-panel">
+                    <div class="stat-label">Vzdálenost</div>
+                    <div class="stat-value small"><span id="distance">0.0</span> / 49 km</div>
+                </div>
             </div>
-            <div class="hud-panel">
-                <div class="stat-label">Vzdálenost</div>
-                <div class="stat-value"><span id="distance">0</span> / 8000 m</div>
-            </div>
+        </div>
+
+        <!-- Speedometer -->
+        <div id="speedometer" style="display: none;">
+            <div class="speed-value"><span id="speed">0</span></div>
+            <div class="speed-unit">km/h</div>
+        </div>
+
+        <!-- Route Progress -->
+        <div id="route-progress" style="display: none;">
+            <div id="route-track"></div>
+            <div class="checkpoint-marker" id="checkpoint-raspenava" title="Raspenava"></div>
+            <div class="checkpoint-marker" id="checkpoint-krystofovo" title="Kryštofovo Údolí"></div>
+            <div class="checkpoint-marker" id="checkpoint-jested" title="Ještěd"></div>
+            <div id="player-marker"></div>
         </div>
 
         <!-- Energy Bar -->
@@ -309,15 +490,16 @@
         <!-- Product Selection -->
         <div id="product-selection">
             <h2>VYBER SPRÁVNÝ PRODUKT!</h2>
-            <p style="color: #888; margin-bottom: 20px;">Co potřebuješ právě teď?</p>
+            <p class="situation" id="situation-text">Co potřebuješ právě teď?</p>
             <div class="product-options" id="product-options"></div>
         </div>
 
         <!-- Finish Screen -->
         <div id="finish-screen">
-            <h1>CÍLE!</h1>
-            <div id="final-time">Tvůj čas: <span id="final-time-value">00:00</span></div>
-            <button id="restart-btn" class="start-btn" style="background: linear-gradient(135deg, #ff6600, #ff3300); border: none; padding: 20px 60px; font-size: 24px; color: white; font-weight: bold; border-radius: 50px; cursor: pointer;">ZNOVU</button>
+            <h1>JEŠTĚD!</h1>
+            <div id="finish-position">Dokončil jsi jako <span id="final-rank">1.</span></div>
+            <div id="final-time">Čas: <span id="final-time-value">00:00</span></div>
+            <button id="restart-btn" style="background: linear-gradient(135deg, #ff6600, #ff3300); border: none; padding: 20px 60px; font-size: 24px; color: white; font-weight: bold; border-radius: 50px; cursor: pointer;">ZNOVU</button>
         </div>
     </div>
 
