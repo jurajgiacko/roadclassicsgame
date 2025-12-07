@@ -72,11 +72,11 @@ const gameState = {
     isPlaying: false,
     speed: 0,
     maxSpeed: 65,
-    acceleration: 0.15,
-    deceleration: 0.05,
-    brakeForce: 0.25,
+    acceleration: 0.8,
+    deceleration: 0.08,
+    brakeForce: 0.4,
     energy: 100,
-    energyDrain: 0.012,
+    energyDrain: 0.008,
     distance: 0,
     totalDistance: TOTAL_DISTANCE,
     elevation: 370,
@@ -945,7 +945,7 @@ function updateGame(delta) {
     if (keys.right) gameState.laneOffset = Math.min(1, gameState.laneOffset + 2 * delta);
 
     // Progress along road
-    const progressSpeed = gameState.speed * delta * 0.00004;
+    const progressSpeed = gameState.speed * delta * 0.00015;
     gameState.progress = Math.min(1, gameState.progress + progressSpeed);
     gameState.distance = gameState.progress * gameState.totalDistance;
 
